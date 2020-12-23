@@ -1,0 +1,20 @@
+<h1 mat-dialog-title style="display: flex; justify-content: center;">Edit {{selectedFacility.facilityName}} </h1>
+  <hr>
+<div mat-dialog-content>
+  <form [formGroup]="facilityForm" (ngSubmit)="saveFacility()">
+    <mat-form-field class="edit-fields">
+      <input matInput placeholder="Facility Name" formControlName="facilityName" required value="{{selectedFacility.facilityName}}"/>
+    </mat-form-field>
+    <mat-form-field class="edit-fields">
+      <input matInput placeholder="Short Code" formControlName="shortCode" required value="{{selectedFacility.shortCode}}"/>
+    </mat-form-field>
+    <mat-form-field class="edit-fields">
+      <input matInput placeholder="Facility ID DS" formControlName="idDs"  required value="{{selectedFacility.idDs}}"/>
+    </mat-form-field>    
+      <mat-checkbox color="primary" name="active" ngModel="checked">Active</mat-checkbox>
+  </form>
+</div>
+<div mat-dialog-actions align="center">
+  <button type="submit" mat-dialog-close mat-raised-button color="accent">Save</button>
+  <button mat-dialog-close mat-raised-button >Cancel</button>
+</div>

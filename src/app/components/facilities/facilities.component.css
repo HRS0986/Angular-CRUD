@@ -1,0 +1,21 @@
+.myTable {
+    width: 98%;    
+    margin: 20px;
+    height: 50%;
+}
+th {
+    font-weight: bolder;
+}
+
+button {
+    outline: none;
+}
+
+table {
+    border-top: 1px gray solid;
+}
+
+.add-btn {
+    margin: 10px;  
+    float: right;
+}

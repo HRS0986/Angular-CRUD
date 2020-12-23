@@ -1,0 +1,20 @@
+<h1 mat-dialog-title style="display: flex; justify-content: center;"> Add New Facility </h1>
+  <hr>
+<div mat-dialog-content>
+  <form fxLayout="column"  fxLayoutAlign="space-around center">
+    <mat-form-field class="edit-fields">
+      <input matInput placeholder="Facility Name" required/>
+    </mat-form-field>
+    <mat-form-field class="edit-fields">
+      <input matInput placeholder="Short Code" required/>
+    </mat-form-field>
+    <mat-form-field class="edit-fields">
+      <input matInput placeholder="Facility ID DS" required/>
+    </mat-form-field>
+      <mat-checkbox color="primary">Active</mat-checkbox>
+  </form>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-dialog-close mat-raised-button type="submit" color="accent">Add</button>
+  <button mat-dialog-close mat-raised-button >Cancel</button>
+</div>
