@@ -5,98 +5,98 @@
       "facilityName": "F One",
       "shortCode": "A",
       "idDs": 9,
-      "activity": "Yes"
+      "activity": true
     },
     {
       "id": 2,
       "facilityName": "F Two",
       "shortCode": "B",
       "idDs": 9,
-      "activity": "Yes"
+      "activity": true
     },
     {
       "id": 3,
       "facilityName": "fdfhdh",
       "shortCode": "fdgT",
       "idDs": 9,
-      "activity": "Yes"
+      "activity": true
     },
     {
       "id": 4,
       "facilityName": "tyrtro",
       "shortCode": "t",
       "idDs": 9,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 5,
       "facilityName": "F675uhty sdo",
       "shortCode": "uT",
       "idDs": 67,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 6,
       "facilityName": "Ffghytwo",
       "shortCode": "zT",
       "idDs": 5,
-      "activity": "Yes"
+      "activity": true
     },
     {
       "id": 7,
       "facilityName": "zzzzzzzzzz",
       "shortCode": "zz",
       "idDs": 9,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 8,
       "facilityName": "yyyyyyy",
       "shortCode": "yy",
       "idDs": 2,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 9,
       "facilityName": "fdgdyyy",
       "shortCode": "df",
       "idDs": 2,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 10,
       "facilityName": "yyttttttttyy",
       "shortCode": "tt",
       "idDs": 2,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 12,
       "facilityName": "yrtyyy",
       "shortCode": "yy",
       "idDs": 2,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 13,
       "facilityName": "yqqqqqqqy",
       "shortCode": "qq",
       "idDs": 2,
-      "activity": "No"
+      "activity": false
     },
     {
       "id": 14,
       "facilityName": "kkkkkkky",
       "shortCode": "kk",
       "idDs": 45,
-      "activity": "Yes"
+      "activity": true
     },
     {
       "id": 15,
       "facilityName": "zzzzzzzzzzzzzzzzzzz",
       "shortCode": "z",
       "idDs": 9,
-      "activity": "Yes"
+      "activity": true
     }
   ]
 }

@@ -9,6 +9,7 @@ export class ShareDataService {
 
   private deleteId: string = '';
   private recordDeleted: boolean = false;
+  private recordAdded: boolean = false;
   private selectedFacility: Facility = {
     facilityName: '',
     shortCode:'',
@@ -41,6 +42,14 @@ export class ShareDataService {
 
   getFacility(): Facility {
     return this.selectedFacility;
+  }
+
+  getAddedState(): boolean {
+    return this.recordAdded;
+  }
+
+  setAddedState(state:boolean): void {
+    this.recordAdded = state;
   }
 
 }

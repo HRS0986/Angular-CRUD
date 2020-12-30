@@ -32,7 +32,12 @@ export class FacilitiesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.facilitiesService.listData().subscribe((data: any) => {           
+    this.getData();
+  };
+    
+  getData(): void {
+    this.table_data = [];    
+    this.facilitiesService.listData().subscribe((data: any) => {
       for (let element of data) {
         let facility: PeriodicElement = {
           facilityName:element.facilityName,
@@ -47,10 +52,12 @@ export class FacilitiesComponent implements OnInit {
         
       }
       this.recordCount = this.table_data.length;
-      this.dataSource = this.table_data;      
+      this.dataSource = [...this.table_data];
+      console.log('Added');
+      console.log(this.dataSource);
     });
-  };
-    
+  }
+
   deleteDialog(facility: PeriodicElement): void {    
     this.shareDataService.setDeleteId(`${facility.id}`);
     const selectedFacility: Facility = {
@@ -63,13 +70,13 @@ export class FacilitiesComponent implements OnInit {
     this.shareDataService.setFacility(selectedFacility);
     this.dialog.open(DeleteDialogComponent)
       .afterClosed()
-      .subscribe((result) => {        
+      .subscribe((result) => {
         if (this.shareDataService.getDeleteState() === true) {          
           this.dataSource = this.dataSource.filter(ele => {            
             return ele.id !== facility.id;
           })
         }
-        this.shareDataService.setDeleteState(false);       
+        this.shareDataService.setDeleteState(false);
       });    
   }
 
@@ -87,11 +94,20 @@ export class FacilitiesComponent implements OnInit {
       .afterClosed()
       .subscribe(result => {
         console.log(result);
+        this.getData();
       });
   }
 
   addDialog(): void {
-    this.dialog.open(NewDialogComponent, { width: '30%' });
+    this.dialog.open(NewDialogComponent, { width: '30%' })
+    .afterClosed()
+    .subscribe(result => {
+      console.log(this.shareDataService.getAddedState());
+      if (this.shareDataService.getAddedState() === true) {
+        this.getData();
+        this.shareDataService.setAddedState(false);
+      }
+    });
   }
 
 }

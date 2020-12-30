@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareDataService } from '../../../services/share-data.service';
 import { Facility } from '../../../types';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FacilitiesService } from 'src/app/services/facilities.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -10,30 +12,39 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class EditDialogComponent implements OnInit {
 
-  constructor(private shareDataService:ShareDataService) { }
+  constructor(
+    private shareDataService:ShareDataService,
+    private facilityService: FacilitiesService,
+    private dialog: MatDialogRef<EditDialogComponent>
+    ) { }
 
   selectedFacility: Facility = this.shareDataService.getFacility();
-  checked: boolean = false;
 
   facilityForm = new FormGroup({
-    facilityName:new FormControl(''),
-    shortCode:new FormControl(''),
-    idDs:new FormControl(''),   
+    facilityName:new FormControl('', [Validators.required]),
+    shortCode:new FormControl('', [Validators.required]),
+    idDs:new FormControl('', [Validators.required]),
+    activity:new FormControl(false),
+    id:new FormControl(this.selectedFacility.id)
   });
 
+  ngOnInit(): void {   
+    this.facilityForm = new FormGroup({
+      facilityName:new FormControl(this.selectedFacility.facilityName),
+      shortCode:new FormControl(this.selectedFacility.shortCode),
+      idDs:new FormControl(this.selectedFacility.idDs),
+      activity: new FormControl(this.selectedFacility.activity),
+      id:new FormControl(this.selectedFacility.id)  
+    })
 
-  ngOnInit(): void {
-    if (this.selectedFacility.activity === "Yes") {
-      this.checked = true;
-    }
-    console.log(this.checked);
-  
   }
    
-
   saveFacility(): void {
-    console.log('Saved');
-    console.log(this.facilityForm.value);
+    console.log('Saved'); 
+    const DATA = JSON.parse(JSON.stringify(this.facilityForm.getRawValue()));
+    console.log(DATA);
+    this.facilityService.updateData(DATA).toPromise().then(result => console.log(`Saved - ${result}`));
+    this.dialog.close();
   }
 
 }
