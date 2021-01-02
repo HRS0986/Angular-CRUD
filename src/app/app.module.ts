@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { EditDialogComponent } from './components/facilities/edit-dialog/edit-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NewDialogComponent } from './components/facilities/new-dialog/new-dialog.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { NewDialogComponent } from './components/facilities/new-dialog/new-dialo
     DeleteDialogComponent,
     EditDialogComponent,
     NewDialogComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

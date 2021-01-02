@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from '../../services/auth-service.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,11 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  loginLogo = '../../../assets/images/login-logo.png';
+  loginLogo: string = '../../../assets/images/login-logo.png';
+  uname: string = 'Login';
 
-  constructor() { }
+  user = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
+  })
+
+  constructor(
+    private authService: AuthServiceService
+  ) { }
+
 
   ngOnInit(): void {
+  }
+
+  login(): void {
+    const LOGIN_DATA = JSON.parse(JSON.stringify(this.user.getRawValue()));
+    
   }
 
 }

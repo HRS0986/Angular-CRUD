@@ -90,7 +90,7 @@ export class FacilitiesComponent implements OnInit {
     };
     this.shareDataService.setFacility(selectedFacility);
 
-    this.dialog.open(EditDialogComponent, { width:'30%' })
+    this.dialog.open(EditDialogComponent, { width:'400px' })
       .afterClosed()
       .subscribe(result => {
         console.log(result);
@@ -99,7 +99,7 @@ export class FacilitiesComponent implements OnInit {
   }
 
   addDialog(): void {
-    this.dialog.open(NewDialogComponent, { width: '30%' })
+    this.dialog.open(NewDialogComponent, { width: '400px' })
     .afterClosed()
     .subscribe(result => {
       console.log(this.shareDataService.getAddedState());

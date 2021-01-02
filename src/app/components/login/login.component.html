@@ -1,4 +1,4 @@
-<div class="login-form">
+<div class="login-form" align="center">
   <img src="{{ loginLogo }}" alt="login-logo" style="margin-bottom: 20px" />  
     <mat-card>
       <mat-card-header fxLayout="column" fxLayoutAlign="space-around center">
@@ -6,13 +6,13 @@
       </mat-card-header>
 
       <mat-card-content>
-        <form class="example-form" fxLayout="column" fxLayoutAlign="space-around center">
+        <form class="example-form" [formGroup]="user" ngNativeValidate>
           <p>Please enter your K9 Username and Password</p>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username" />
+            <input matInput formControlName="username" placeholder="Username" required/>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <input matInput type="password" placeholder="Password" />
+            <input matInput formControlName="password" type="password" placeholder="Password" required/>
           </mat-form-field>
 
           <div>
@@ -20,9 +20,12 @@
           </div>
 
           <br />
-          <button mat-raised-button color="primary" class="login-btn">
+          <button type="submit" mat-raised-button color="primary" (ngSubmit)="login()" class="login-btn" [disabled]="!user.valid">
             Login
           </button>
+          <div style="padding-top: 5px;">
+            <p>Don't have an account ? <a href="#">Register</a></p>
+          </div>
         </form>
       </mat-card-content>
     </mat-card>

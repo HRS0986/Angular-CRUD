@@ -9,15 +9,15 @@
 }
 
 .login-btn {
-    width: 100% !important; 
+  width: 100% !important;
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;    
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  justify-content: center;
+  align-items: center;
 }
 
 button {

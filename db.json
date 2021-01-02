@@ -120,13 +120,6 @@
       "id": 21
     },
     {
-      "facilityName": "ttttttttttttttrtrtrtrtrt",
-      "shortCode": "t",
-      "idDs": "7",
-      "activity": true,
-      "id": 23
-    },
-    {
       "facilityName": "from Hansa Pc",
       "shortCode": "fhp",
       "idDs": "45",
@@ -134,11 +127,31 @@
       "id": 24
     },
     {
-      "facilityName": "mmmmmmmm",
-      "shortCode": "m",
+      "facilityName": "MyPc",
+      "shortCode": "p",
       "idDs": "5",
       "activity": true,
-      "id": 25
+      "id": 26
+    },
+    {
+      "facilityName": "from network",
+      "shortCode": "nt",
+      "idDs": "5",
+      "activity": true,
+      "id": 27
+    },
+    {
+      "facilityName": "Galaxy ",
+      "shortCode": "J6",
+      "idDs": "6",
+      "activity": false,
+      "id": 28
+    }
+  ],
+  "users": [
+    {
+      "username": "root",
+      "password": "7494cb35bd02646271a54af1e596eec8"
     }
   ]
 }
