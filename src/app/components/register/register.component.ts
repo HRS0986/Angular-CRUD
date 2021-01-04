@@ -18,9 +18,12 @@ export class RegisterComponent implements OnInit {
     username: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required]),
     confirmPassword: new FormControl('', [Validators.required])
-  },{validator: checkPasswords()});
+  },{validators : checkPasswords()});
+
+  
 
   ngOnInit(): void {
+  
   }
 
   register(): void {
