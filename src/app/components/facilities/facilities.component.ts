@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FacilitiesService } from '../../services/facilities.service';
 import { ShareDataService } from '../../services/share-data.service';
+import { TokenStorageService } from "../../services/token-storage.service";
 
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
@@ -19,6 +20,8 @@ import { PeriodicElement, Facility } from '../../types';
 
 export class FacilitiesComponent implements OnInit {
 
+  username:string = '';
+
   displayedColumns: string[] = ['facilityName', 'shortCode', 'idDs', 'activity', 'edit', 'delete'];  
   
   table_data: PeriodicElement[] = [];
@@ -26,6 +29,7 @@ export class FacilitiesComponent implements OnInit {
   recordCount: number = 0;
   
   constructor(
+    private tokenStorage: TokenStorageService,
     private facilitiesService:FacilitiesService, 
     public dialog:MatDialog,
     private shareDataService:ShareDataService,
@@ -34,6 +38,10 @@ export class FacilitiesComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
   };
+
+  logout(): void {
+    this.tokenStorage.logout();
+  }
     
   getData(): void {
     this.table_data = [];    

@@ -3,7 +3,7 @@ import { ShareDataService } from '../../../services/share-data.service';
 import { Facility } from '../../../types';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacilitiesService } from 'src/app/services/facilities.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -35,10 +35,9 @@ export class EditDialogComponent implements OnInit {
       idDs:new FormControl(this.selectedFacility.idDs),
       activity: new FormControl(this.selectedFacility.activity),
       id:new FormControl(this.selectedFacility.id)  
-    })
-
+    });
   }
-   
+  
   saveFacility(): void {
     console.log('Saved'); 
     const DATA = JSON.parse(JSON.stringify(this.facilityForm.getRawValue()));

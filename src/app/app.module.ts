@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { FacilitiesComponent } from './components/facilities/facilities.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,10 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeleteDialogComponent } from './components/facilities/delete-dialog/delete-dialog.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { EditDialogComponent } from './components/facilities/edit-dialog/edit-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { LoginComponent } from './components/login/login.component';
+import { FacilitiesComponent } from './components/facilities/facilities.component'
+import { DeleteDialogComponent } from './components/facilities/delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from './components/facilities/edit-dialog/edit-dialog.component';
 import { NewDialogComponent } from './components/facilities/new-dialog/new-dialog.component';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -54,6 +56,7 @@ import { RegisterComponent } from './components/register/register.component';
     MatPaginatorModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatToolbarModule,
   ],  
   entryComponents: [
     DeleteDialogComponent,

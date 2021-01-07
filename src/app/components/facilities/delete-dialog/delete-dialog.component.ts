@@ -1,4 +1,3 @@
-import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FacilitiesService } from '../../../services/facilities.service';
 import { ShareDataService } from '../../../services/share-data.service';
@@ -23,9 +22,11 @@ export class DeleteDialogComponent implements OnInit {
     this.facility
       .deleteData(this.shareDataService.getDeleteId())
       .toPromise()
-      .then(result => console.log(result, 'Deleted'))
-      .catch(err => console.log(err));
-    this.shareDataService.setDeleteState(true);
+      .then(result => {
+        this.shareDataService.setDeleteState(true);
+        console.log(result, 'Deleted');
+      })
+      .catch(err => console.log(err));    
   }
 
   onDestroy(): void {}

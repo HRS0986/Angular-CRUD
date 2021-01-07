@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { Router } from '@angular/router';
+import { FormControl, Validators, FormBuilder } from "@angular/forms";
 import { checkPasswords } from '../../app.validators';
+import { AuthService } from "../../services/auth.service";
+
 
 @Component({
   selector: 'app-register',
@@ -10,24 +13,44 @@ import { checkPasswords } from '../../app.validators';
 export class RegisterComponent implements OnInit {
 
   loginLogo: string = '../../../assets/images/login-logo.png';
+  isSuccessful: boolean = false;
+  isSignUpFailed: boolean = false;
+  errorMsg: string = '';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+    ) { }
 
   newUserForm = this.formBuilder.group({
-    email: new FormControl('', [Validators.email, Validators.required]),
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required])
+    username: new FormControl(''),
+    email: new FormControl('', [Validators.email]),
+    password: new FormControl(''),
+    confirmPassword: new FormControl('')
   },{validators : checkPasswords()});
 
-  
-
-  ngOnInit(): void {
-  
+  ngOnInit(): void {  
   }
 
   register(): void {
-    console.log(this.newUserForm.getRawValue());
+    const username = this.newUserForm.getRawValue().username;
+    const email = this.newUserForm.getRawValue().email;
+    const password = this.newUserForm.getRawValue().password.toString();
+    
+    this.auth.register(username, email, password).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+        this.router.navigate(['/login']);
+      },
+      err => {
+        this.errorMsg = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
+
   }
 
 }

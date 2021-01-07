@@ -1,10 +1,10 @@
 {
   "facilities": [
     {
-      "facilityName": "F One",
+      "facilityName": "Facility One",
       "shortCode": "A",
       "idDs": 9,
-      "activity": false,
+      "activity": true,
       "id": 1
     },
     {
@@ -57,23 +57,9 @@
       "activity": false
     },
     {
-      "id": 10,
-      "facilityName": "yyttttttttyy",
-      "shortCode": "tt",
-      "idDs": 2,
-      "activity": false
-    },
-    {
       "id": 11,
       "facilityName": "yrtyyy",
       "shortCode": "yy",
-      "idDs": 2,
-      "activity": false
-    },
-    {
-      "id": 12,
-      "facilityName": "yqqqqqqqy",
-      "shortCode": "qq",
       "idDs": 2,
       "activity": false
     },
@@ -99,25 +85,11 @@
       "id": 17
     },
     {
-      "facilityName": "xxxxxxxxxx",
-      "shortCode": "xxx",
-      "idDs": "77",
-      "activity": true,
-      "id": 18
-    },
-    {
       "facilityName": "ddd",
       "shortCode": "ddd",
       "idDs": "343",
       "activity": true,
       "id": 20
-    },
-    {
-      "facilityName": "testgggggg",
-      "shortCode": "rest",
-      "idDs": "45",
-      "activity": true,
-      "id": 21
     },
     {
       "facilityName": "from Hansa Pc",
@@ -148,10 +120,18 @@
       "id": 28
     }
   ],
+  "error": [
+    {
+      "errorCode": 401,
+      "message": "You are not authorized"
+    }
+  ],
   "users": [
     {
-      "username": "root",
-      "password": "7494cb35bd02646271a54af1e596eec8"
+      "email": "heshanhfernando@gmail.com",
+      "password": "$2a$10$WBs8yz.YCeSR.P8kaw9BQeqVDGDCuPlTbCms6M5w6mDfDQ4zf/yb6",
+      "username": "Hirusha Fernando",
+      "id": 1
     }
   ]
 }

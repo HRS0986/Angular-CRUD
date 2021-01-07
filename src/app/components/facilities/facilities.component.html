@@ -1,3 +1,14 @@
+<mat-toolbar color="accent" class="toolbar"> 
+  <span>CRUD App</span>
+  <span class="example-spacer"></span>
+  <div class="user">
+    
+  </div>
+  <div class="logout">
+    <button mat-flat-button color="accent" (click)="logout()" class="log">Logout</button>
+  </div>
+</mat-toolbar>
+
 <div class="mat-elevation-z8">
   <button mat-raised-button color="primary" (click)="addDialog()" class="add-btn">Add New Facility</button>
   <table mat-table [dataSource]="dataSource" class="myTable">
@@ -44,7 +55,7 @@
         </button>
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true;"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>    
   </table>
   <!-- <mat-paginator

@@ -1,39 +1,81 @@
 <div class="login-form">
-    <img src="{{ loginLogo }}" alt="login-logo" style="margin-bottom: 20px" />  
+  <img src="{{ loginLogo }}" alt="login-logo" style="margin-bottom: 20px" />
 
-      <mat-card style="width: 350px;">
+  <mat-card style="width: 350px">
+    <mat-card-header fxLayout="column" fxLayoutAlign="space-around center">
+      <p class="h4 mb-4">Register</p>
+    </mat-card-header>
 
-        <mat-card-header fxLayout="column" fxLayoutAlign="space-around center">
-          <p class="h4 mb-4">Register</p>
-        </mat-card-header>
-  
-        <mat-card-content>
-          <form class="example-form" [formGroup]="newUserForm" (ngSubmit)="register()" fxLayout="column" fxLayoutAlign="space-around center" ngNativeValidate>
-            <p>Please enter your detail </p>
+    <mat-card-content>
+      <form
+        class="example-form"
+        [formGroup]="newUserForm"
+        (ngSubmit)="register()"
+        fxLayout="column"
+        fxLayoutAlign="space-around center"
+        #f="ngForm"
+        ngNativeValidate
+      >
+        <p>Please enter your detail</p>
 
-            <mat-form-field class="example-full-width">
-                <input type="email" matInput placeholder="Email" formControlName="email" required/>
-            </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            type="text"
+            matInput
+            placeholder="Username"
+            formControlName="username"
+            required
+          />
+          
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            type="email"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required
+          />
+        </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username" formControlName="username" required />
-            </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+        </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-              <input matInput type="password" placeholder="Password" formControlName="password" required /> 
-            </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="password"
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+            required
+          />
+        </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required />
-            </mat-form-field> 
-           
-            <br />
-            <button mat-raised-button type="submit" color="primary" class="login-btn" [disabled]="!newUserForm.valid">
-              Register
-            </button>
-          </form>
-        </mat-card-content>
+        <div class="error" *ngIf="f.submitted && isSignUpFailed">
+          Registration Failed!
+        </div>
 
-      </mat-card>
-
-  </div>  
+        <br />
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          class="login-btn"
+          [disabled]="!newUserForm.valid"
+        >
+          Register
+        </button>
+        <p style="margin-top: 10px">
+          Already have an account ? <a routerLink="/login">Login</a>
+        </p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
