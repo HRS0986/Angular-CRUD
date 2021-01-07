@@ -5,7 +5,6 @@ import { TokenStorageService } from "./token-storage.service";
 
 
 const AUTH_API = 'http://localhost:3000/';
-// Auth API repo: https://github.com/techiediaries/fake-api-jwt-json-server
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
