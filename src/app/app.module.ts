@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +26,7 @@ import { DeleteDialogComponent } from './components/facilities/delete-dialog/del
 import { EditDialogComponent } from './components/facilities/edit-dialog/edit-dialog.component';
 import { NewDialogComponent } from './components/facilities/new-dialog/new-dialog.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 
 @NgModule({
@@ -66,7 +67,13 @@ import { RegisterComponent } from './components/register/register.component';
   exports: [
     MatCheckboxModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

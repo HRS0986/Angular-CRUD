@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from "./auth.service";
 import { Router } from '@angular/router';
-import { TokenStorageService } from "./token-storage.service";
 
 
 @Injectable({
@@ -17,25 +16,15 @@ export class FacilitiesService {
   constructor(
     private http:HttpClient,
     private auth:AuthService,
-    private router: Router,
-    private tokenStorage: TokenStorageService,
-    ) { }
-
-  TOKEN = this.tokenStorage.getToken();
-
-  httpOptions = {
-    headers: new HttpHeaders({ "Authorization": `Bearer ${this.TOKEN}` })
-  };
+    private router: Router
+  ) { }
   
   listData():Observable<any>{
     if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/login']);
       return this.http.get(`${this.URL}/error`);
     }
-    return this.http.get(
-      `${this.URL}/660/facilities`,
-      this.httpOptions
-      );
+    return this.http.get(`${this.URL}/660/facilities`);
   }
 
   deleteData(id: string):Observable<any>{
@@ -44,9 +33,7 @@ export class FacilitiesService {
       return this.http.get(`${this.URL}/error`);
     }
     return this.http.delete(
-      `${this.URL}/660/facilities/${id}`,
-      this.httpOptions
-      );
+      `${this.URL}/660/facilities/${id}`);
   }
 
   updateData(data:any):Observable<any>{
@@ -57,8 +44,7 @@ export class FacilitiesService {
     const ID = data.id;
     return this.http.put(
       `${this.URL}/660/facilities/${ID}`, 
-      data,
-      this.httpOptions
+      data
       );
   }
 
@@ -69,8 +55,7 @@ export class FacilitiesService {
     }
     return this.http.post(
       `${this.URL}/660/facilities`,
-      data,
-      this.httpOptions
+      data
       );
   }
 }
