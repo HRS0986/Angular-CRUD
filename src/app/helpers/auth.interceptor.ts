@@ -3,24 +3,29 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  // HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+// import { catchError } from 'rxjs/operators';
 
-import { TokenStorageService } from "../services/token-storage.service";
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   constructor(private tokenStorage: TokenStorageService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-    if (this.tokenStorage.getToken()) {
-      const TOKEN = this.tokenStorage.getToken();
-      const req = request.clone({ headers: request.headers.set("Authorization", `Bearer ${TOKEN}`) });
-      return next.handle(req);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (this.tokenStorage.getAccessToken()) {
+      const TOKEN = this.tokenStorage.getAccessToken();
+      request = this.attachToken(request, TOKEN);
     }
     return next.handle(request);
+  }
+
+  private attachToken(request: HttpRequest<any>, token: string | null): HttpRequest<any> {
+    return request.clone({
+      headers: request.headers.set('Authorization', `Bearer ${token}`)
+    });
   }
 }

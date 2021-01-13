@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, Validators, FormBuilder } from "@angular/forms";
 import { checkPasswords } from '../../app.validators';
 import { AuthService } from "../../services/auth.service";
+import { Md5 } from 'ts-md5';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
   register(): void {
     const username = this.newUserForm.getRawValue().username;
     const email = this.newUserForm.getRawValue().email;
-    const password = this.newUserForm.getRawValue().password.toString();
+    const password = Md5.hashStr(this.newUserForm.getRawValue().password.toString()).toString();
     
     this.auth.register(username, email, password).subscribe(
       data => {
@@ -48,6 +49,7 @@ export class RegisterComponent implements OnInit {
       err => {
         this.errorMsg = err.error.message;
         this.isSignUpFailed = true;
+        console.log(this.errorMsg);
       }
     );
 

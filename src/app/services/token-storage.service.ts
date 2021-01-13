@@ -1,42 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
 
 
-const TOKEN_KEY = "auth-token";
-// const USER_KEY = "auth-user";
+const JWT_TOKEN_KEY = "auth-token";
+const REFRESH_TOKEN_KEY = "refresh-token";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenStorageService {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  logout(): void {
-    window.sessionStorage.clear();
-    this.router.navigate(['/login']);
+  removeAccessToken(): void {
+    window.sessionStorage.removeItem(JWT_TOKEN_KEY);     
   }
 
-  saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+  removeRefreshToken(): void {
+    window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
   }
 
-  getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+  saveAccessToken(token: string): void {
+    window.sessionStorage.removeItem(JWT_TOKEN_KEY);
+    window.sessionStorage.setItem(JWT_TOKEN_KEY, token);
+  }
+  saveRefreshToken(token: string): void {
+    window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
+    window.sessionStorage.setItem(REFRESH_TOKEN_KEY, token);
   }
 
-  // saveUser(user:any): void {
-  //   window.sessionStorage.removeItem(USER_KEY);
-  //   window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-  // }
+  getAccessToken(): string | null {
+    return window.sessionStorage.getItem(JWT_TOKEN_KEY);
+  }
 
-  // getUser(): any {
-  //   const user = window.sessionStorage.getItem(USER_KEY);
-  //   if (user) {
-  //     return JSON.parse(user);
-  //   }
-  //   return {};
-  // }
+  getRefreshToken(): string | null {
+    return window.sessionStorage.getItem(REFRESH_TOKEN_KEY);
+  }
   
 }

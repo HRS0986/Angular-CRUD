@@ -5,7 +5,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { TokenStorageService } from "../../services/token-storage.service";
 
 
-var ACCESS_TOKEN: string = '';
 
 @Component({
   selector: 'app-login',
@@ -33,22 +32,20 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
+    if (this.tokenStorage.getAccessToken()) {
       this.isLoggedIn = true;
     }
   }
 
   login(): void {
     const email = this.user.getRawValue().email;
-    const password = this.user.getRawValue().password.toString();
+    const password = Md5.hashStr(this.user.getRawValue().password.toString()).toString();
 
     this.auth.login(email, password).subscribe(
       data => {
         console.log(data);
         this.isLoggedIn = true;
         this.isLoginFailed = false;
-        ACCESS_TOKEN = data.accessToken;
-        this.tokenStorage.saveToken(ACCESS_TOKEN);
         window.location.reload();
       },
       err => {

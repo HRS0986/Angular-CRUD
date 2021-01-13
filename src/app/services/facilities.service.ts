@@ -24,7 +24,7 @@ export class FacilitiesService {
       this.router.navigate(['/login']);
       return this.http.get(`${this.URL}/error`);
     }
-    return this.http.get(`${this.URL}/660/facilities`);
+    return this.http.get(`${this.URL}/facilities`);
   }
 
   deleteData(id: string):Observable<any>{
@@ -33,7 +33,7 @@ export class FacilitiesService {
       return this.http.get(`${this.URL}/error`);
     }
     return this.http.delete(
-      `${this.URL}/660/facilities/${id}`);
+      `${this.URL}/facilities/${id}`);
   }
 
   updateData(data:any):Observable<any>{
@@ -43,7 +43,7 @@ export class FacilitiesService {
     }
     const ID = data.id;
     return this.http.put(
-      `${this.URL}/660/facilities/${ID}`, 
+      `${this.URL}/facilities/${ID}`, 
       data
       );
   }
@@ -54,7 +54,7 @@ export class FacilitiesService {
       return this.http.get(`${this.URL}/error`);
     }
     return this.http.post(
-      `${this.URL}/660/facilities`,
+      `${this.URL}/facilities`,
       data
       );
   }

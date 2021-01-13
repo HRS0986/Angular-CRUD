@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FacilitiesService } from '../../services/facilities.service';
 import { ShareDataService } from '../../services/share-data.service';
-import { TokenStorageService } from "../../services/token-storage.service";
+import { AuthService } from '../../services/auth.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
@@ -29,10 +28,10 @@ export class FacilitiesComponent implements OnInit {
   recordCount: number = 0;
   
   constructor(
-    private tokenStorage: TokenStorageService,
     private facilitiesService:FacilitiesService, 
     public dialog:MatDialog,
     private shareDataService:ShareDataService,
+    private auth: AuthService,
     ) { }
 
   ngOnInit(): void {
@@ -40,29 +39,30 @@ export class FacilitiesComponent implements OnInit {
   };
 
   logout(): void {
-    this.tokenStorage.logout();
+    this.auth.logout();
   }
     
   getData(): void {
     this.table_data = [];    
     this.facilitiesService.listData().subscribe((data: any) => {
-      for (let element of data) {
-        let facility: PeriodicElement = {
-          facilityName:element.facilityName,
-          shortCode:element.shortCode,
-          idDs:element.idDs,
-          activity:element.activity,
-          edit:"edit",
-          delete:"delete",
-          id:element.id
-        };
-        this.table_data.push(facility);
-        
-      }
-      this.recordCount = this.table_data.length;
-      this.dataSource = [...this.table_data];
-      console.log('Added');
-      console.log(this.dataSource);
+      console.log(data)
+      // if (data.status == 200) {
+        for (let element of data) {
+          let facility: PeriodicElement = {
+            facilityName:element.facilityName,
+            shortCode:element.shortCode,
+            idDs:element.idDs,
+            activity:element.activity,
+            edit:"edit",
+            delete:"delete",
+            id:element.id
+          };
+          this.table_data.push(facility);
+          
+        }
+        this.recordCount = this.table_data.length;
+        this.dataSource = [...this.table_data];
+        console.log(this.dataSource);
     });
   }
 
@@ -78,14 +78,14 @@ export class FacilitiesComponent implements OnInit {
     this.shareDataService.setFacility(selectedFacility);
     this.dialog.open(DeleteDialogComponent)
       .afterClosed()
-      .subscribe((result) => {
+      .subscribe(() => {
         if (this.shareDataService.getDeleteState() === true) {          
           this.dataSource = this.dataSource.filter(ele => {            
             return ele.id !== facility.id;
           })
         }
         this.shareDataService.setDeleteState(false);
-      });    
+      });
   }
 
   editDialog(facility: PeriodicElement): void{
@@ -109,7 +109,7 @@ export class FacilitiesComponent implements OnInit {
   addDialog(): void {
     this.dialog.open(NewDialogComponent, { width: '400px' })
     .afterClosed()
-    .subscribe(result => {
+    .subscribe(() => {
       console.log(this.shareDataService.getAddedState());
       if (this.shareDataService.getAddedState() === true) {
         this.getData();
