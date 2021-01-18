@@ -8,7 +8,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { MatButtonModule } from  '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from "@angular/material/card";
@@ -19,7 +18,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
 import { LoginComponent } from './components/login/login.component';
 import { FacilitiesComponent } from './components/facilities/facilities.component'
 import { DeleteDialogComponent } from './components/facilities/delete-dialog/delete-dialog.component';
@@ -27,6 +25,13 @@ import { EditDialogComponent } from './components/facilities/edit-dialog/edit-di
 import { NewDialogComponent } from './components/facilities/new-dialog/new-dialog.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { AuthService } from './services/auth.service';
+import { FacilitiesService } from './services/facilities.service';
+import { TokenStorageService } from "./services/token-storage.service";
+import { ShareDataService } from "./services/share-data.service";
+import { UserService } from "./services/user.service";
+import { FacilityAuthGuard } from "./guards/facility-auth.guard";
+import { LoginAuthGuard } from "./guards/login-auth.guard";
 
 
 @NgModule({
@@ -68,6 +73,13 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     MatCheckboxModule,
   ],
   providers: [
+    AuthService,
+    UserService,
+    FacilitiesService,
+    ShareDataService,
+    TokenStorageService,
+    FacilityAuthGuard,
+    LoginAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

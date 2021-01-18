@@ -43,19 +43,26 @@ export class FacilitiesService {
     }
     const ID = data.id;
     return this.http.put(
-      `${this.URL}/facilities/${ID}`, 
-      data
+      `${this.URL}/facilities/${ID}`,
+      data,
+      { responseType: 'text' }
       );
   }
 
   addData(data:any):Observable<any>{
     if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/login']);
-      return this.http.get(`${this.URL}/error`);
+      console.log('Error......');
     }
     return this.http.post(
       `${this.URL}/facilities`,
-      data
+      data,
+      { responseType: 'text' }
       );
+  }
+
+  
+  random(): Observable<any> {
+    return this.http.get(`${this.URL}/random`);
   }
 }

@@ -12,28 +12,29 @@ export class TokenStorageService {
   constructor() { }
 
   removeAccessToken(): void {
-    window.sessionStorage.removeItem(JWT_TOKEN_KEY);     
+    window.sessionStorage.removeItem(JWT_TOKEN_KEY); 
   }
 
-  removeRefreshToken(): void {
-    window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
+  removeRefreshToken(): void {    
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
   }
 
   saveAccessToken(token: string): void {
     window.sessionStorage.removeItem(JWT_TOKEN_KEY);
-    window.sessionStorage.setItem(JWT_TOKEN_KEY, token);
-  }
-  saveRefreshToken(token: string): void {
-    window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
-    window.sessionStorage.setItem(REFRESH_TOKEN_KEY, token);
+    window.sessionStorage.setItem(JWT_TOKEN_KEY, token);   
   }
 
-  getAccessToken(): string | null {
+  saveRefreshToken(token: string): void {    
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    localStorage.setItem(REFRESH_TOKEN_KEY, token);
+  }
+
+  getAccessToken(): string | null {    
     return window.sessionStorage.getItem(JWT_TOKEN_KEY);
   }
 
   getRefreshToken(): string | null {
-    return window.sessionStorage.getItem(REFRESH_TOKEN_KEY);
+    return localStorage.getItem(REFRESH_TOKEN_KEY);    
   }
   
 }

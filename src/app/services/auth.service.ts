@@ -47,14 +47,16 @@ export class AuthService {
   }
 
   logout(): Observable<boolean> {
+    console.log('From Auth Service');
+
     const REFRESH_TOKEN = this.tokenStorage.getRefreshToken();
     return this.http
-      .post(AUTH_API + 'logout', { 'refreshToken':REFRESH_TOKEN }, httpOptions)
+      .post(AUTH_API + 'logout', { refreshToken:REFRESH_TOKEN }, httpOptions)
       .pipe(
         tap(() => {
           this.tokenStorage.removeAccessToken();
           this.tokenStorage.removeRefreshToken();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login']);          
         }),
         mapTo(true),
         catchError((err) => {
@@ -68,12 +70,15 @@ export class AuthService {
     return !!this.tokenStorage.getAccessToken();
   }
 
-  tokenRefresh(): Observable<any> {
+  tokenRefresh(): Observable<any> {    
     const REFRESH_TOKEN = this.tokenStorage.getRefreshToken();
+
     return this.http.post(
       AUTH_API + 'refresh',
       { refreshToken: REFRESH_TOKEN },
       httpOptions
     );
+
   }
+
 }
