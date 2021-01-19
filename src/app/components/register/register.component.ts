@@ -39,13 +39,13 @@ export class RegisterComponent implements OnInit {
     const email = this.newUserForm.getRawValue().email;
     const password = Md5.hashStr(this.newUserForm.getRawValue().password.toString()).toString();
     
-    this.auth.register(username, email, password).subscribe(
+    this.auth.register(username, email, password).toPromise().then(
       data => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.router.navigate(['/login']);
-      },
+      }).catch(
       err => {
         this.errorMsg = err.error.message;
         this.isSignUpFailed = true;

@@ -61,8 +61,7 @@ export class FacilitiesComponent implements OnInit {
 
   getData(): void {
     this.table_data = [];
-    this.facilitiesService.listData().subscribe((data: any) => {
-      console.log(data);
+    this.facilitiesService.listData().subscribe((data: any) => {      
       for (let element of data) {
         let facility: PeriodicElement = {
           facilityName: element.facilityName,
