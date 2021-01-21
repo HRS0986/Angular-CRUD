@@ -30,8 +30,8 @@
         </button>
       </div>
     </mat-toolbar>
-    <div class="mat-elevation-z8">
-      <button
+      <div>
+         <button
         mat-raised-button
         color="primary"
         (click)="addDialog()"
@@ -39,6 +39,9 @@
       >
         Add New Facility
       </button>
+      
+      </div>
+     
       <div class="mat-elevation-z8">  <!-- mat-elevation-z8 is an angular defined class -->
       <table mat-table [dataSource]="dataSource" class="myTable" matSort>
         <ng-container matColumnDef="facilityName">
@@ -107,15 +110,16 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         <tr mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{hide: dataSource!=null}"></tr>
         <tr mat-footer-row *matFooterRowDef="['empty']" [ngClass]="{hide: !(dataSource!=null && dataSource.length==0)}"></tr>
+        
       </table>
-    </div>    
-      <mat-paginator
+   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
-    [pageSize]="10"
-    [length]="recordCount"
+    [pageSize]="10"    
     showFirstLastButtons
   ></mat-paginator>
-    </div>
+      
+</div>
+   
   </div>
 </mat-drawer-content>
 </mat-drawer-container>

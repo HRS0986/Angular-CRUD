@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FacilitiesService } from '../../services/facilities.service';
 import { ShareDataService } from '../../services/share-data.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
@@ -38,6 +39,7 @@ export class FacilitiesComponent implements OnInit {
   ) {}
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.getData();
@@ -70,7 +72,7 @@ export class FacilitiesComponent implements OnInit {
         this.recordCount = array.length;
         this.dataSource = new MatTableDataSource(array);
         this.dataSource.sort = this.sort;
-
+        this.dataSource.paginator = this.paginator;
         console.log(this.dataSource);
       })
       .catch((err) => console.log(err));
