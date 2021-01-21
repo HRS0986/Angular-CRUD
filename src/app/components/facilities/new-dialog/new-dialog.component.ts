@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FacilitiesService } from 'src/app/services/facilities.service';
-import { ShareDataService } from 'src/app/services/share-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

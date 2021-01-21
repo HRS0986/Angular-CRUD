@@ -39,8 +39,8 @@
       >
         Add New Facility
       </button>
-
-      <table mat-table [dataSource]="dataSource" matSort class="myTable">
+      <div class="mat-elevation-z8">  <!-- mat-elevation-z8 is an angular defined class -->
+      <table mat-table [dataSource]="dataSource" class="myTable" matSort>
         <ng-container matColumnDef="facilityName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Facility Name
@@ -90,14 +90,28 @@
             </button>
           </td>
         </ng-container>
+        <ng-container matColumnDef="loading">
+          <td mat-footer-cell *matFooterCellDef colspan="6">
+            Loading Data...
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="empty">
+          <td mat-footer-cell *matFooterCellDef colspan="6">
+            No Data
+          </td>          
+        </ng-container>
         <tr
           mat-header-row
           *matHeaderRowDef="displayedColumns; "
         ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>      
+        <tr mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{hide: dataSource!=null}"></tr>
+        <tr mat-footer-row *matFooterRowDef="['empty']" [ngClass]="{hide: !(dataSource!=null && dataSource.length==0)}"></tr>
+      </table>
+    </div>    
       <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
     [length]="recordCount"
     showFirstLastButtons
   ></mat-paginator>

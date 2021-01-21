@@ -57,3 +57,12 @@ th {
 .example-sidenav {
   padding: 20px;
 }
+
+.hide {
+  display:none;
+}
+
+[mat-footer-row], [mat-footer-cell] {  
+  text-align: center;
+  font-style: italic;
+}

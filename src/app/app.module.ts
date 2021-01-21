@@ -67,7 +67,8 @@ import { LoginAuthGuard } from "./guards/login-auth.guard";
     ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatSortModule
   ],  
   entryComponents: [
     DeleteDialogComponent,
