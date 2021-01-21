@@ -18,15 +18,13 @@ export class NewDialogComponent implements OnInit {
   });
 
   constructor(
-    private facilityService: FacilitiesService,
-    private shareDataService: ShareDataService,
+    private facilityService: FacilitiesService,    
     private dialog: MatDialogRef<NewDialogComponent>
   ) {}
 
   ngOnInit(): void {}
 
-  addFacility(): void {
-    this.shareDataService.setAddedState(true);
+  addFacility(): void {  
     const DATA = JSON.parse(JSON.stringify(this.newFacility.getRawValue()));
     this.facilityService
       .addData(DATA)

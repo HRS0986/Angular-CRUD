@@ -33,7 +33,9 @@ export class FacilitiesService {
       return this.http.get(`${this.URL}/error`);
     }
     return this.http.delete(
-      `${this.URL}/facilities/${id}`);
+      `${this.URL}/facilities/${id}`,
+      { responseType: 'text' }
+      );
   }
 
   updateData(data:any):Observable<any>{

@@ -24,6 +24,11 @@ table {
     position: sticky;
     top: 0;
     z-index: 1000;
+    margin-bottom: 5px;
+}
+
+th {
+  border: 0 1px 0 0 solid black;
 }
 
 .example-spacer {
@@ -34,4 +39,21 @@ table {
     text-decoration: none;
     list-style: none;
     margin: 5px;
+}
+
+.example-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.fexample-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
 }

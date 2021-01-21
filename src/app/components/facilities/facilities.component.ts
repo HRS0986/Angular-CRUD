@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FacilitiesService } from '../../services/facilities.service';
 import { ShareDataService } from '../../services/share-data.service';
 import { AuthService } from '../../services/auth.service';
-
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { NewDialogComponent } from './new-dialog/new-dialog.component';
-
 import { PeriodicElement, Facility } from '../../types';
 
 @Component({
@@ -15,7 +15,7 @@ import { PeriodicElement, Facility } from '../../types';
   templateUrl: './facilities.component.html',
   styleUrls: ['./facilities.component.css'],
 })
-export class FacilitiesComponent implements OnInit {
+export class FacilitiesComponent implements AfterViewInit, OnInit {
   username: string = '';
 
   displayedColumns: string[] = [
@@ -38,8 +38,14 @@ export class FacilitiesComponent implements OnInit {
     private auth: AuthService
   ) {}
 
+  @ViewChild(MatSort) sort!: MatSort;
+
   ngOnInit(): void {
     this.getData();
+  }
+
+  ngAfterViewInit(): void {
+    // this.dataSource.sort = this.sort;
   }
 
   random(): void {
@@ -61,23 +67,30 @@ export class FacilitiesComponent implements OnInit {
 
   getData(): void {
     this.table_data = [];
-    this.facilitiesService.listData().subscribe((data: any) => {      
-      for (let element of data) {
-        let facility: PeriodicElement = {
-          facilityName: element.facilityName,
-          shortCode: element.shortCode,
-          idDs: element.idDs,
-          activity: element.activity,
-          edit: 'edit',
-          delete: 'delete',
-          id: element.id,
-        };
-        this.table_data.push(facility);
-      }
-      this.recordCount = this.table_data.length;
-      this.dataSource = [...this.table_data];
-      console.log(this.dataSource);
-    });
+    this.facilitiesService
+      .listData()
+      .toPromise()
+      .then((data: Facility[]) => {
+        console.log('Data : ', data);
+        for (let element of data) {
+          let facility: PeriodicElement = {
+            facilityName: element.facilityName,
+            shortCode: element.shortCode,
+            idDs: element.idDs,
+            activity: element.activity,
+            edit: 'edit',
+            delete: 'delete',
+            id: element.id,
+          };
+          this.table_data.push(facility);
+        }
+        this.recordCount = this.table_data.length;
+        this.dataSource = this.table_data;
+        // this.dataSource.sort = this.sort;
+
+        console.log(this.dataSource);
+      })
+      .catch((err) => console.log(err));
   }
 
   deleteDialog(facility: PeriodicElement): void {
@@ -93,14 +106,9 @@ export class FacilitiesComponent implements OnInit {
     this.dialog
       .open(DeleteDialogComponent)
       .afterClosed()
-      .subscribe(() => {
-        if (this.shareDataService.getDeleteState() === true) {
-          this.dataSource = this.dataSource.filter((ele) => {
-            return ele.id !== facility.id;
-          });
-        }
-        this.shareDataService.setDeleteState(false);
-      });
+      .toPromise()
+      .then(() => this.getData())
+      .catch((err) => console.log(err));
   }
 
   editDialog(facility: PeriodicElement): void {
@@ -116,22 +124,17 @@ export class FacilitiesComponent implements OnInit {
     this.dialog
       .open(EditDialogComponent, { width: '400px' })
       .afterClosed()
-      .subscribe((result) => {
-        console.log(result);
-        this.getData();
-      });
+      .toPromise()
+      .then(() => this.getData())
+      .catch((err) => console.log(err));
   }
 
   addDialog(): void {
     this.dialog
       .open(NewDialogComponent, { width: '400px' })
       .afterClosed()
-      .subscribe(() => {
-        console.log(this.shareDataService.getAddedState());
-        if (this.shareDataService.getAddedState() === true) {
-          this.getData();
-          this.shareDataService.setAddedState(false);
-        }
-      });
+      .toPromise()
+      .then(() => this.getData())
+      .catch((err) => console.log(err));
   }
 }

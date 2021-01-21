@@ -9,11 +9,14 @@ import { DataTablesModule } from 'angular-datatables';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from  '@angular/material/button';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav'; 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -63,6 +66,8 @@ import { LoginAuthGuard } from "./guards/login-auth.guard";
     MatCheckboxModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule
   ],  
   entryComponents: [
     DeleteDialogComponent,
@@ -71,6 +76,7 @@ import { LoginAuthGuard } from "./guards/login-auth.guard";
   ],
   exports: [
     MatCheckboxModule,
+    MatSidenavModule,
   ],
   providers: [
     AuthService,

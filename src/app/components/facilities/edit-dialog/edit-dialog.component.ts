@@ -37,8 +37,7 @@ export class EditDialogComponent implements OnInit {
     });
   }
 
-  saveFacility(): void {
-    console.log('Saved');
+  saveFacility(): void {    
     const DATA = JSON.parse(JSON.stringify(this.facilityForm.getRawValue()));
     console.log(DATA);
     this.facilityService
